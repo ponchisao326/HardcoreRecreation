@@ -37,9 +37,6 @@ public final class WorldReset {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("HardcoreRecreation");
 
-    private static final Component ANNOUNCEMENT =
-            Component.literal("Alguien ha muerto. El mundo se regenera.");
-
     private static final String DIMENSIONS_DIR = "dimensions";
 
     private static final String PLAYERS_DIR = "players";
@@ -53,7 +50,6 @@ public final class WorldReset {
         PlayerList playerList = server.getPlayerList();
         List<ServerPlayer> players = List.copyOf(playerList.getPlayers());
 
-        playerList.broadcastSystemMessage(ANNOUNCEMENT, false);
         server.setAutoSave(false);
 
         detachPlayers(players);
