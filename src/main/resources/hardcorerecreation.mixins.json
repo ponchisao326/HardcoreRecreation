@@ -4,6 +4,8 @@
   "package": "com.victorgponce.hardcorerecreation.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
+    "ForcedHardcoreMixin",
+    "ForcedServerSettingsMixin",
     "HardcoreRespawnMixin",
     "MinecraftServerAccessor",
     "PlayerListAccessor",

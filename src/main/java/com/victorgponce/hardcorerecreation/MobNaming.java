@@ -24,8 +24,10 @@ public final class MobNaming {
         EntityType<?> type = entity.getType();
         if (type == EntityTypes.ENDERMAN) {
             entity.setCustomName(ENDERMAN_NAME);
+            entity.setCustomNameVisible(true);
         } else if (type == EntityTypes.CHICKEN) {
             entity.setCustomName(CHICKEN_NAME);
+            entity.setCustomNameVisible(true);
         }
     }
 }
