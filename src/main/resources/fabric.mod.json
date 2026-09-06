@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "hardcorerecreation",
+  "version": "${version}",
+  "name": "HardcoreRecreation",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/hardcorerecreation/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "com.victorgponce.hardcorerecreation.Hardcorerecreation"
+    ]
+  },
+  "mixins": [
+    "hardcorerecreation.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

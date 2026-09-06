@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.victorgponce.hardcorerecreation.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "HardcoreRespawnMixin",
+    "MinecraftServerAccessor",
+    "PlayerListAccessor",
+    "ServerGamePacketListenerImplInvoker"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
