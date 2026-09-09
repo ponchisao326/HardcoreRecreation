@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.PlayerAdvancements;
+import net.minecraft.server.ServerScoreboard;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
@@ -18,6 +19,9 @@ import net.minecraft.world.level.levelgen.WorldOptions;
 import net.minecraft.world.level.storage.LevelData;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraft.world.level.storage.ServerLevelData;
+import net.minecraft.world.scores.Objective;
+import net.minecraft.world.scores.PlayerTeam;
+import net.minecraft.world.scores.ScoreboardSaveData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,6 +68,7 @@ public final class WorldReset {
 
         reseed(server);
         resetLevelMetadata(server);
+        detachScoreboard(server);
 
         ((MinecraftServerAccessor) server).hardcorerecreation$loadLevel();
 
@@ -160,6 +165,18 @@ public final class WorldReset {
         overworldData.setSpawn(LevelData.RespawnData.DEFAULT);
         overworldData.setGameTime(0L);
         server.setRespawnData(LevelData.RespawnData.DEFAULT);
+    }
+
+    private static void detachScoreboard(MinecraftServer server) {
+        ServerScoreboard scoreboard = server.getScoreboard();
+        ScoreboardSaveData saveData = server.getDataStorage().computeIfAbsent(ScoreboardSaveData.TYPE);
+        scoreboard.storeToSaveDataIfDirty(saveData);
+        for (Objective objective : List.copyOf(scoreboard.getObjectives())) {
+            scoreboard.removeObjective(objective);
+        }
+        for (PlayerTeam team : List.copyOf(scoreboard.getPlayerTeams())) {
+            scoreboard.removePlayerTeam(team);
+        }
     }
 
     private static void replacePlayer(PlayerList playerList, ServerLevel overworld, ServerPlayer player) {
